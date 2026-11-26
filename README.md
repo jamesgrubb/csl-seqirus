@@ -40,6 +40,18 @@ npm run deploy
 Upload videos with `wrangler r2 object put ... --remote` (or the dashboard). Encode as
 H.264/AAC MP4 with `-movflags +faststart` so playback starts before the whole file downloads.
 
+## Automatic deploys
+
+Pushing to GitHub runs `.github/workflows/deploy.yml`: it builds the site, applies new D1 migrations
+(main only) and deploys. `main` goes to production; any other branch gets a preview URL.
+
+It needs two repository secrets (GitHub → Settings → Secrets and variables → Actions):
+
+- `CLOUDFLARE_API_TOKEN`: a Cloudflare API token with **Cloudflare Pages: Edit** and **D1: Edit**.
+- `GOOGLE_MAPS_API_KEY`: the same browser key as in `.env.local`.
+
+Until the token is added, runs only build. `npm run deploy` from a laptop still works too.
+
 ## URLs
 
 | Stage | URL |

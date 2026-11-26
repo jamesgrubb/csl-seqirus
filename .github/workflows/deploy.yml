@@ -1,0 +1,44 @@
+# Builds the site and deploys it to the catchyourselfnotflu Pages project (a direct-upload project,
+# so Cloudflare doesn't watch git itself). main → production; other branches → preview URLs.
+# Repository secrets needed: CLOUDFLARE_API_TOKEN (Pages: Edit, D1: Edit) and GOOGLE_MAPS_API_KEY.
+name: Deploy
+
+on:
+  push:
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  CLOUDFLARE_ACCOUNT_ID: 166a90f05ce77609ac5401cb3906c397
+  CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Build
+        run: npm run build
+        env:
+          GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
+
+      # Apply new D1 migrations before the code that needs them goes live (production only).
+      - name: Migrate database
+        if: env.CLOUDFLARE_API_TOKEN != '' && github.ref == 'refs/heads/main'
+        run: npm run db:migrate:remote
+
+      # Until the secret is added, runs stop after a successful build.
+      - name: Deploy to Cloudflare Pages
+        if: env.CLOUDFLARE_API_TOKEN != ''
+        run: npx wrangler pages deploy --branch "${{ github.ref_name }}" --commit-hash "${{ github.sha }}" --commit-dirty=true
