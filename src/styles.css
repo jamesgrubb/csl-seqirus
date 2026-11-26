@@ -298,6 +298,9 @@ code {
 }
 /* Campaign line under the animation, aligned with its text column */
 .hero__title {
+  /* sits over the animation's empty lower edge, so keep it in front of the canvas */
+  position: relative;
+  z-index: 1;
   width: min(100%, calc(600px * 16 / 9));
   margin-top: clamp(-56px, -3vw, -16px);
   /* the animation insets its text by 4.5% of its width */
