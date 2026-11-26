@@ -9,8 +9,19 @@ import { Thumbnail } from "./Thumbnail";
 // Assets still to come. Drop the files into public/ and set the paths here.
 const REPORT_PDF: string | null = null; // e.g. "/report/catch-yourself-report.pdf"
 const REPORT_COVER: string | null = null; // e.g. "/images/report-cover.jpg"
-// e.g. { src: "/images/southbank-1-small.jpg", full: "/images/southbank-1.jpg", alt: "Commuters on the South Bank…" }
-const SOUTHBANK_PHOTOS: Photo[] = [];
+// Grid uses the 800px file; the lightbox loads the full-size one. Files are in public/images/southbank.
+const southbank = (n: number, alt: string): Photo => ({
+  src: `/images/southbank/southbank-0${n}-800.webp`,
+  full: `/images/southbank/southbank-0${n}.webp`,
+  alt,
+});
+const SOUTHBANK_PHOTOS: Photo[] = [
+  southbank(1, "A couple take a selfie in a mirror panel reading “I’ll book my flu jab lat”, with St Paul’s across the river"),
+  southbank(2, "A woman stops at a mirror panel reading “It’s only fl” on the riverside walk near Waterloo"),
+  southbank(3, "Friends take a selfie in a mirror panel reading “I’ll be fi”, with the Houses of Parliament behind"),
+  southbank(4, "A man looks at a mirror panel reading “It’s on my li” in front of the London Eye"),
+  southbank(5, "A parent and child wave at their reflection in a mirror panel reading “I never get fl”"),
+];
 const PHOTO_PLACEHOLDERS = 5;
 
 export function CampaignPage({ data }: { data: VideoListResponse | null }) {
