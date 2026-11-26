@@ -5,7 +5,7 @@ import { ArrowRightIcon } from "./Icons";
 // Images are Unsplash License photos, duotoned in brand colours (public/images/cards).
 const CARDS: { n: number; href: string | null; image: string; credit: string }[] = [
   { n: 1, href: null, image: "eligibility", credit: "Ed Us, unsplash.com/photos/K0DMl4NmOPo" },
-  { n: 2, href: null, image: "advice", credit: "National Cancer Institute, unsplash.com/photos/NNpo-liY5aU" },
+  { n: 2, href: null, image: "advice", credit: "National Cancer Institute, unsplash.com/photos/byGTytEGjBo" },
   { n: 3, href: null, image: "faq", credit: "Kelly Sikkema, unsplash.com/photos/RmByg5kFfQg" },
   { n: 4, href: "https://www.nhs.uk/vaccinations/flu-vaccine/", image: "nhs", credit: "Kristine Wook, unsplash.com/photos/E1_RW3HIbUw" },
 ];
