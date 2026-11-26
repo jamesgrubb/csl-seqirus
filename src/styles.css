@@ -285,26 +285,28 @@ code {
 /* The animation is a full composition, so the band grows to fit all of it and the
    angled cut and box overlap only the empty ground below. */
 .banner__image--animation {
+  /* Left edge of the page grid: where .container content starts. (Mirrored in HeroAnimation.tsx.) */
+  --grid-left: max(var(--gutter), calc((100% - var(--max)) / 2 + var(--gutter)));
   display: flex;
   flex-direction: column;
-  align-items: center;
   height: auto;
   padding-bottom: var(--cut-depth);
   background: var(--near-black);
 }
-/* The element keeps 16:9 from its width. */
+/* The animation insets its text by 4.5% of its width. Shift it left so that text lands on the grid,
+   and run it to the right edge of the screen so the reply's mist can drift off screen. */
 .banner__image--animation seqirus-disappear {
-  width: min(100%, calc(600px * 16 / 9));
+  align-self: flex-start;
+  width: calc((100% - var(--grid-left)) / 0.955);
+  margin-left: calc(var(--grid-left) - (100% - var(--grid-left)) / 0.955 * 0.045);
 }
-/* Campaign line under the animation, aligned with its text column */
+/* Campaign line under the animation, on the same grid line */
 .hero__title {
   /* sits over the animation's empty lower edge, so keep it in front of the canvas */
   position: relative;
   z-index: 1;
-  width: min(100%, calc(600px * 16 / 9));
   margin-top: clamp(-56px, -3vw, -16px);
-  /* the animation insets its text by 4.5% of its width */
-  padding: 0 calc(min(100vw, 600px * 16 / 9) * 0.045) clamp(24px, 4vw, 48px);
+  padding: 0 var(--grid-left) clamp(24px, 4vw, 48px);
   font-size: clamp(30px, 5vw, 64px);
   font-weight: 700;
   line-height: 1.05;
