@@ -1,15 +1,13 @@
 import { EditableText, useEdit, useText } from "../edit";
 import { ArrowRightIcon } from "./Icons";
 
-type Preview = "form" | "people" | "faq" | "article";
-
 // Destinations. The first three sites are fictitious, so href is null until real pages exist.
-// Each card shows a drawn preview of its page in place of a screenshot.
-const CARDS: { n: number; href: string | null; url: string; preview: Preview }[] = [
-  { n: 1, href: null, url: "catchyourselfnotflu.co.uk/eligibility", preview: "form" },
-  { n: 2, href: null, url: "catchyourselfnotflu.co.uk/advice", preview: "people" },
-  { n: 3, href: null, url: "catchyourselfnotflu.co.uk/faq", preview: "faq" },
-  { n: 4, href: "https://www.nhs.uk/vaccinations/flu-vaccine/", url: "nhs.uk/vaccinations/flu-vaccine", preview: "article" },
+// Images are Unsplash License photos, duotoned in brand colours (public/images/cards).
+const CARDS: { n: number; href: string | null; image: string; credit: string }[] = [
+  { n: 1, href: null, image: "eligibility", credit: "Ed Us, unsplash.com/photos/K0DMl4NmOPo" },
+  { n: 2, href: null, image: "advice", credit: "National Cancer Institute, unsplash.com/photos/NNpo-liY5aU" },
+  { n: 3, href: null, image: "faq", credit: "Kelly Sikkema, unsplash.com/photos/RmByg5kFfQg" },
+  { n: 4, href: "https://www.nhs.uk/vaccinations/flu-vaccine/", image: "nhs", credit: "Kristine Wook, unsplash.com/photos/E1_RW3HIbUw" },
 ];
 
 export function LinkCards() {
@@ -25,7 +23,7 @@ export function LinkCards() {
   );
 }
 
-function LinkCard({ n, href, url, preview }: (typeof CARDS)[number]) {
+function LinkCard({ n, href, image }: (typeof CARDS)[number]) {
   const { editor } = useEdit();
   const button = useText(`more.${n}.button`);
   const external = href?.startsWith("http");
@@ -34,7 +32,7 @@ function LinkCard({ n, href, url, preview }: (typeof CARDS)[number]) {
     // The button's ::after stretches over the card so the whole card is clickable,
     // except in edit mode where clicks need to reach the text.
     <li className={`link-card${editor ? "" : " link-card--clickable"}`}>
-      <SitePreview url={url} kind={preview} />
+      <img className="link-card__image" src={`/images/cards/${image}.webp`} alt="" width={800} height={500} loading="lazy" />
       <div className="link-card__body">
         <EditableText as="h3" className="link-card__title" contentKey={`more.${n}.title`} label="Card title" />
         <EditableText as="p" className="link-card__text" contentKey={`more.${n}.text`} label="Card text" multiline />
@@ -54,57 +52,5 @@ function LinkCard({ n, href, url, preview }: (typeof CARDS)[number]) {
         )}
       </div>
     </li>
-  );
-}
-
-/** A small drawn browser window standing in for a screenshot of the destination page. */
-function SitePreview({ url, kind }: { url: string; kind: Preview }) {
-  return (
-    <div className={`site-preview site-preview--${kind}`} aria-hidden="true">
-      <div className="site-preview__bar">
-        <span className="site-preview__dots" />
-        <span className="site-preview__url">{url}</span>
-      </div>
-      <div className="site-preview__page">
-        <span className="sp-heading" />
-        {kind === "form" && (
-          <>
-            {[0, 1, 2].map((i) => (
-              <span key={i} className="sp-option">
-                <span className="sp-radio" />
-                <span className="sp-line" />
-              </span>
-            ))}
-            <span className="sp-button" />
-          </>
-        )}
-        {kind === "people" &&
-          [0, 1].map((i) => (
-            <span key={i} className="sp-quote">
-              <span className="sp-avatar" />
-              <span className="sp-lines">
-                <span className="sp-line" />
-                <span className="sp-line sp-line--short" />
-              </span>
-            </span>
-          ))}
-        {kind === "faq" &&
-          [0, 1, 2, 3].map((i) => (
-            <span key={i} className="sp-faq">
-              <span className="sp-line" />
-              <span className="sp-plus">+</span>
-            </span>
-          ))}
-        {kind === "article" && (
-          <>
-            <span className="sp-line" />
-            <span className="sp-line" />
-            <span className="sp-line sp-line--short" />
-            <span className="sp-callout" />
-            <span className="sp-line" />
-          </>
-        )}
-      </div>
-    </div>
   );
 }

@@ -772,116 +772,14 @@ html:has(.lightbox[open]) {
   inset: 0;
 }
 
-/* Drawn browser window standing in for a page screenshot */
-.site-preview {
+/* Duotone photo with the CSL angle on its bottom edge */
+.link-card__image {
+  width: 100%;
+  height: auto;
   aspect-ratio: 16 / 10;
-  overflow: hidden;
-  background: var(--stone-200);
+  object-fit: cover;
   clip-path: var(--cut-thumb);
-}
-.site-preview__bar {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  height: 26px;
-  padding: 0 10px;
-  background: var(--stone-300);
-}
-.site-preview__dots {
-  width: 30px;
-  height: 7px;
-  flex-shrink: 0;
-  background: radial-gradient(circle at 3.5px 50%, var(--stone-400) 3.5px, transparent 4px) 0 0 / 11px 7px repeat-x;
-}
-.site-preview__url {
-  overflow: hidden;
-  padding: 2px 8px;
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  color: var(--grey);
-  background: var(--paper);
-  border-radius: 10px;
-}
-.site-preview__page {
-  display: flex;
-  flex-direction: column;
-  gap: 9px;
-  height: 100%;
-  margin: 12px 14% 0;
-  padding: 16px 16px 0;
-  background: var(--paper);
-}
-.sp-heading {
-  width: 70%;
-  height: 12px;
-  background: var(--ink);
-}
-.sp-line {
-  display: block;
-  height: 6px;
-  flex: 1;
-  background: var(--stone-300);
-}
-.sp-line--short {
-  max-width: 60%;
-}
-.sp-option,
-.sp-faq,
-.sp-quote {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.sp-radio {
-  width: 11px;
-  height: 11px;
-  flex-shrink: 0;
-  border: 2px solid var(--stone-400);
-  border-radius: 50%;
-}
-.sp-option:first-of-type .sp-radio {
-  border-color: var(--red);
-  background: radial-gradient(circle, var(--red) 2px, transparent 3px);
-}
-.sp-button {
-  width: 38%;
-  height: 16px;
-  margin-top: 4px;
-  border-radius: 8px;
-  background: var(--red);
-}
-.sp-avatar {
-  width: 22px;
-  height: 22px;
-  flex-shrink: 0;
-  border-radius: 50%;
-  background: var(--stone-400);
-}
-.sp-quote:nth-of-type(2) .sp-avatar {
-  background: var(--red);
-}
-.sp-lines {
-  display: grid;
-  flex: 1;
-  gap: 5px;
-}
-.sp-faq {
-  padding-bottom: 6px;
-  border-bottom: 1px solid var(--stone-200);
-}
-.sp-plus {
-  font-size: 12px;
-  font-weight: 700;
-  line-height: 1;
-  color: var(--red);
-}
-.sp-callout {
-  height: 22px;
-  border-left: 4px solid var(--ink);
-  background: var(--stone-100);
+  background: var(--near-black);
 }
 
 /* Closing call to action, bookending the hero */
