@@ -2,6 +2,8 @@ import type { Video } from "../shared/types";
 
 export interface Env {
   DB: D1Database;
+  /** The site's static files (Pages binds this automatically). */
+  ASSETS: Fetcher;
   VIDEOS?: R2Bucket; // optional until the R2 bucket is bound in wrangler.toml
   /** Cloudflare Access team domain, e.g. "csl-video.cloudflareaccess.com". Empty = editing disabled. */
   ACCESS_TEAM_DOMAIN?: string;
