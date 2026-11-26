@@ -491,6 +491,12 @@ code {
 }
 .report__cover img {
   width: 100%;
+  height: auto;
+}
+/* The supplied cover is a mock-up with its own shadow on a transparent ground */
+.report__cover--image {
+  max-width: 540px;
+  box-shadow: none;
 }
 .report__box {
   grid-column: 2;
@@ -1161,6 +1167,9 @@ a:hover .thumb__play {
   .report__cover {
     max-width: 260px;
     justify-self: start;
+  }
+  .report__cover--image {
+    max-width: 360px;
   }
   .report__box {
     grid-column: 1;
