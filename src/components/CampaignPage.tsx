@@ -121,9 +121,9 @@ function Report() {
         {REPORT_COVER ? (
           <img
             src={REPORT_COVER}
-            alt="The Catch yourself. Not the flu. campaign report 2026, cover showing a passenger on a bus passing a pharmacy"
+            alt="The Catch yourself. Not the flu. campaign report 2026, with a silver foil cover"
             width={1200}
-            height={1379}
+            height={1380}
             loading="lazy"
           />
         ) : (
