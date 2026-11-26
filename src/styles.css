@@ -779,7 +779,7 @@ html:has(.lightbox[open]) {
   aspect-ratio: 16 / 10;
   object-fit: cover;
   clip-path: var(--cut-thumb);
-  background: var(--near-black);
+  background: #5c1013; /* duotone shadow colour, shown while the image loads */
 }
 
 /* Closing call to action, bookending the hero */
