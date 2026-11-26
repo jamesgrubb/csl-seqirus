@@ -3,6 +3,7 @@ import { Editable, EditableText, useEdit } from "../edit";
 import { linkProps } from "../router";
 import { FluJabMap } from "./FluJabMap";
 import { HeroAnimation } from "./HeroAnimation";
+import { LinkCards } from "./LinkCards";
 import { PhotoGallery, type Photo } from "./PhotoGallery";
 import { Thumbnail } from "./Thumbnail";
 
@@ -33,6 +34,7 @@ export function CampaignPage({ data }: { data: VideoListResponse | null }) {
       <Report />
       <SouthBank />
       <FindFluJab />
+      <LinkCards />
       <Close />
     </>
   );
