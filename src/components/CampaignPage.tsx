@@ -3,6 +3,7 @@ import { Editable, EditableText, useEdit } from "../edit";
 import { linkProps } from "../router";
 import { FluJabMap } from "./FluJabMap";
 import { HeroAnimation } from "./HeroAnimation";
+import { HeroVideo } from "./HeroVideo";
 import { LinkCards } from "./LinkCards";
 import { PhotoGallery, type Photo } from "./PhotoGallery";
 import { Thumbnail } from "./Thumbnail";
@@ -44,6 +45,7 @@ function Hero() {
   return (
     <section className="banner banner--animation">
       <div className="banner__image banner__image--animation">
+        <HeroVideo />
         <HeroAnimation />
         <EditableText as="h1" className="hero__title" contentKey="hero.title" label="Campaign line" />
       </div>

@@ -293,6 +293,33 @@ code {
   padding-bottom: var(--cut-depth);
   background: var(--near-black);
 }
+/* Background film under the animation, tinted so the white type and red line stay readable.
+   The tint is heaviest on the left and along the bottom, where the text sits. */
+.banner__image--animation {
+  position: relative;
+}
+.hero-video {
+  position: absolute;
+  inset: 0;
+}
+.hero-video video,
+.hero-video img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hero-video::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, transparent 45%, rgb(35 31 32 / 0.7) 100%),
+    linear-gradient(90deg, rgb(35 31 32 / 0.82) 0%, rgb(35 31 32 / 0.62) 55%, rgb(35 31 32 / 0.45) 100%);
+}
+.banner__image--animation seqirus-disappear {
+  position: relative;
+}
+
 /* The animation insets its text by 4.5% of its width. Shift it left so that text lands on the grid,
    and run it to the right edge of the screen so the reply's mist can drift off screen. */
 .banner__image--animation seqirus-disappear {
