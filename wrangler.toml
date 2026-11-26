@@ -1,0 +1,24 @@
+# Cloudflare Pages project config — https://developers.cloudflare.com/pages/functions/wrangler-configuration/
+name = "catchyourselfnotflu"   # → https://catchyourselfnotflu.pages.dev
+pages_build_output_dir = "./dist"
+compatibility_date = "2025-06-01"
+
+# Edit mode sign-in (Cloudflare Access). Leave empty to keep editing switched off.
+[vars]
+ACCESS_TEAM_DOMAIN = "csl-seqirus.cloudflareaccess.com" # e.g. "your-team.cloudflareaccess.com"
+ACCESS_AUD = "3bb6a9c787ca4c95788f2c1fcd93a4d88832b4fd23283305805e5109d3edbb20" # Application Audience (AUD) tag from the Access application
+
+# Video metadata, categories etc.
+# Create with: npx wrangler d1 create csl-seqirus-db  → paste the database_id below
+[[d1_databases]]
+binding = "DB"
+database_name = "csl-seqirus-db"
+database_id = "5d1f3b04-e887-4b21-9fe0-927129883409"
+migrations_dir = "migrations"
+
+# Video files + poster images
+# R2 must first be enabled in the Cloudflare dashboard (R2 Object Storage → Get started).
+# Then: npx wrangler r2 bucket create csl-seqirus-videos  → uncomment below and redeploy.
+# [[r2_buckets]]
+# binding = "VIDEOS"
+# bucket_name = "csl-seqirus-videos"
