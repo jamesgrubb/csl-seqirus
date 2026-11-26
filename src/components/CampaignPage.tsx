@@ -9,7 +9,7 @@ import { Thumbnail } from "./Thumbnail";
 
 // Assets still to come. Drop the files into public/ and set the paths here.
 const REPORT_PDF: string | null = null; // e.g. "/report/catch-yourself-report.pdf"
-const REPORT_COVER: string | null = null; // e.g. "/images/report-cover.jpg"
+const REPORT_COVER: string | null = "/images/report/report-cover.webp"; // mock-up on transparent ground (original in media-src/)
 // Grid uses the 800px file; the lightbox loads the full-size one. Files are in public/images/southbank.
 const southbank = (n: number, alt: string): Photo => ({
   src: `/images/southbank/southbank-0${n}-800.webp`,
@@ -117,9 +117,15 @@ function Stat({ n }: { n: number }) {
 function Report() {
   return (
     <section className="section container report">
-      <div className="report__cover">
+      <div className={`report__cover${REPORT_COVER ? " report__cover--image" : ""}`}>
         {REPORT_COVER ? (
-          <img src={REPORT_COVER} alt="Front cover of the campaign report" />
+          <img
+            src={REPORT_COVER}
+            alt="The Catch yourself. Not the flu. campaign report 2026, cover showing a passenger on a bus passing a pharmacy"
+            width={1200}
+            height={1379}
+            loading="lazy"
+          />
         ) : (
           <div className="cover-placeholder" aria-hidden="true">
             <span className="cover-placeholder__brand">CSL Seqirus</span>
