@@ -3,12 +3,14 @@ import { Editable, EditableText, useEdit } from "../edit";
 import { linkProps } from "../router";
 import { FluJabMap } from "./FluJabMap";
 import { HeroAnimation } from "./HeroAnimation";
+import { PhotoGallery, type Photo } from "./PhotoGallery";
 import { Thumbnail } from "./Thumbnail";
 
 // Assets still to come. Drop the files into public/ and set the paths here.
 const REPORT_PDF: string | null = null; // e.g. "/report/catch-yourself-report.pdf"
 const REPORT_COVER: string | null = null; // e.g. "/images/report-cover.jpg"
-const SOUTHBANK_PHOTOS: { src: string; alt: string }[] = []; // e.g. { src: "/images/southbank-1.jpg", alt: "…" }
+// e.g. { src: "/images/southbank-1-small.jpg", full: "/images/southbank-1.jpg", alt: "Commuters on the South Bank…" }
+const SOUTHBANK_PHOTOS: Photo[] = [];
 const PHOTO_PLACEHOLDERS = 5;
 
 export function CampaignPage({ data }: { data: VideoListResponse | null }) {
@@ -128,26 +130,16 @@ function Report() {
 }
 
 function SouthBank() {
-  const photos = SOUTHBANK_PHOTOS.length
+  const photos: Photo[] = SOUTHBANK_PHOTOS.length
     ? SOUTHBANK_PHOTOS
-    : Array.from({ length: PHOTO_PLACEHOLDERS }, () => null);
+    : Array.from({ length: PHOTO_PLACEHOLDERS }, (_, i) => ({ src: null, alt: `South Bank photo ${i + 1}` }));
   return (
     <section className="southbank">
       <div className="container">
         <div className="box southbank__box">
           <EditableText as="h2" className="box__title box__title--light" contentKey="southbank.title" label="South Bank heading" />
         </div>
-        <div className="photos">
-          {photos.map((p, i) =>
-            p ? (
-              <img key={p.src} className="photo" src={p.src} alt={p.alt} loading="lazy" />
-            ) : (
-              <div key={i} className="photo photo--placeholder" aria-hidden="true">
-                <span>South Bank photo {i + 1}</span>
-              </div>
-            ),
-          )}
-        </div>
+        <PhotoGallery photos={photos} />
       </div>
     </section>
   );
